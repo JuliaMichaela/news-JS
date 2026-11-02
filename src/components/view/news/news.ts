@@ -27,9 +27,9 @@ class News {
 
         if (idx % 2) getElement(newsClone, '.news__item').classList.add('alt');
 
-        getElement(newsClone, '.news__meta-photo').style.backgroundImage = `url(${
-            item.urlToImage || 'img/news_placeholder.jpg'
-        })`;
+        if (item.urlToImage) {
+            getElement(newsClone, '.news__meta-photo').style.backgroundImage = `url("${item.urlToImage}")`;
+        }
         getElement(newsClone, '.news__meta-author').textContent = item.author || item.source.name;
         getElement(newsClone, '.news__meta-date').textContent = item.publishedAt
             .slice(0, 10)
