@@ -1,5 +1,3 @@
-export type ApiStatus = 'ok' | 'error';
-
 export enum Endpoint {
     Sources = 'sources',
     Everything = 'everything',
@@ -51,23 +49,15 @@ export interface ArticlesResponse {
     articles: Article[];
 }
 
-export interface ApiErrorResponse {
-    status: 'error';
-    code: string;
-    message: string;
-}
-
 export interface EndpointResponseMap {
     [Endpoint.Sources]: SourcesResponse;
     [Endpoint.Everything]: ArticlesResponse;
 }
 
-export type ApiResponse<T> = T | ApiErrorResponse;
-
 export type QueryParams = Record<string, string | number | boolean | undefined>;
 
-export interface RequestConfig {
-    endpoint: Endpoint;
+export interface RequestConfig<E extends Endpoint = Endpoint> {
+    endpoint: E;
     options?: QueryParams;
 }
 
